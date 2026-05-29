@@ -10,7 +10,7 @@ I created this minimal Jsonnet online preview project with a split editor / prev
 
 ## Online
 
-- Live URL: not published yet
+- Live URL: [https://jsonnet.acexy.cn](https://jsonnet.acexy.cn)
 
 ## Features
 
