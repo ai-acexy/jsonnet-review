@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jsonnet Review</title>
+    <script>
+      (() => {
+        const key = "jsonnet-review-layout-mode";
+        const mode = localStorage.getItem(key);
+        if (mode === "editor" || mode === "preview" || mode === "split") {
+          document.documentElement.setAttribute("data-layout-mode", mode);
+        }
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="./public/assets/favicon.svg" />
+    <link rel="shortcut icon" href="./public/assets/favicon.svg" />
+    <link rel="stylesheet" href="./public/vendor/codemirror/codemirror.min.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <h1>Jsonnet Review</h1>
+        <p>Jsonnet 在线预览与格式转换</p>
+      </div>
+      <div class="actions">
+        <select id="formatSelect" aria-label="输出格式">
+          <option value="json">JSON</option>
+          <option value="yaml">YAML</option>
+        </select>
+        <button id="themeBtn" type="button">夜间模式</button>
+        <button id="sampleBtn" type="button">示例</button>
+        <button id="copyInputBtn" type="button">复制 Jsonnet</button>
+        <button id="copyOutputBtn" type="button">复制结果</button>
+        <button id="clearBtn" type="button">清空</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel" id="editorPanel">
+        <div class="panel-title">
+          <span>编辑区</span>
+          <span id="inputMeta">Jsonnet</span>
+        </div>
+        <textarea id="editor" spellcheck="false" aria-label="Jsonnet 输入"></textarea>
+      </section>
+
+      <button class="splitter" id="splitterControls" type="button" aria-label="切换分栏模式" title="点击切换模式；拖拽可调整比例">
+        <span class="splitter-dot" aria-hidden="true"></span>
+      </button>
+
+      <section class="panel" id="previewPanel">
+        <div class="panel-title">
+          <span id="previewTitle">结果区（JSON）</span>
+          <span id="statusBadge" class="status-badge">初始化</span>
+        </div>
+        <pre id="preview" aria-live="polite"><code></code></pre>
+      </section>
+    </main>
+
+    <script src="./public/vendor/codemirror/codemirror.min.js"></script>
+    <script src="./public/vendor/codemirror/addon/edit/matchbrackets.min.js"></script>
+    <script src="./public/vendor/codemirror/mode/jsonnet/codemirror-mode-jsonnet.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
