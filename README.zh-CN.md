@@ -16,6 +16,7 @@
 
 - 我实现了输入时实时预览
 - 我集成了官方 go-jsonnet WebAssembly 运行时
+- 我设计了 CDN 优先加载，失败自动回退本地资源
 - 我增加了 Jsonnet WASM 执行所需的本地依赖资源
 - 我集成了 CodeMirror 5 用于 Jsonnet 语法高亮
 - 我启用了行号、括号匹配与软 Tab 缩进
@@ -38,6 +39,7 @@
 ## 项目结构
 
 - `index.html`：页面骨架与 UI 结构
+- `bootstrap.js`：CDN 优先 + 本地回退的资源加载器
 - `style.css`：布局与视觉样式
 - `app.js`：Jsonnet 渲染与交互逻辑
 - `public/assets`：页面本地资源

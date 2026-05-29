@@ -211,11 +211,62 @@ html[data-layout-mode="preview"] #editorPanel,
   padding: 3px 8px;
   background: var(--accent-soft);
   color: var(--accent);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-badge.is-success {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-badge.is-warning {
+  background: #fef3c7;
+  color: #b45309;
 }
 
 .status-badge.is-error {
   background: var(--danger-soft);
   color: var(--danger);
+}
+
+.status-badge.is-loading {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.status-badge.is-loading::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: currentColor;
+  animation: statusPulse 1s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+body[data-theme="dark"] .status-badge.is-success {
+  background: rgba(34, 197, 94, 0.18);
+  color: #86efac;
+}
+
+body[data-theme="dark"] .status-badge.is-warning {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fcd34d;
 }
 
 #editor,

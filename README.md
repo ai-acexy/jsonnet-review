@@ -16,6 +16,7 @@ I created this minimal Jsonnet online preview project with a split editor / prev
 
 - I implemented real-time preview while typing
 - I integrated the official go-jsonnet WebAssembly runtime
+- I designed CDN-first loading with automatic local fallback
 - I added local vendor assets for Jsonnet WASM execution
 - I integrated CodeMirror 5 for Jsonnet syntax highlighting
 - I enabled line numbers, bracket matching, and soft-tab indentation
@@ -38,6 +39,7 @@ I created this minimal Jsonnet online preview project with a split editor / prev
 ## Project Structure
 
 - `index.html`: page skeleton and UI structure
+- `bootstrap.js`: CDN-first loader with local fallback
 - `style.css`: layout and visual styles
 - `app.js`: Jsonnet rendering and interactions
 - `public/assets`: local page assets

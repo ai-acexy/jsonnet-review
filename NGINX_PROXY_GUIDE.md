@@ -48,15 +48,26 @@ server {
         try_files $uri $uri/ /index.html;
     }
 
+    location = /index.html {
+        add_header Cache-Control "no-cache";
+    }
+
+    location ~* ^/(app|bootstrap)\.js$|^/style\.css$ {
+        add_header Cache-Control "no-cache";
+    }
+
     location ~* \.wasm$ {
-        types {
-            application/wasm wasm;
-        }
+        default_type application/wasm;
         expires 7d;
         add_header Cache-Control "public, max-age=604800, immutable";
     }
 
-    location ~* \.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?)$ {
+    location ~* ^/public/vendor/.*\.(js|css)$ {
+        expires 7d;
+        add_header Cache-Control "public, max-age=604800, immutable";
+    }
+
+    location ~* ^/public/assets/.*\.(png|jpg|jpeg|gif|svg|ico|woff2?)$ {
         expires 7d;
         add_header Cache-Control "public, max-age=604800, immutable";
     }
@@ -79,10 +90,21 @@ server {
         try_files $uri $uri/ /index.html;
     }
 
+    location = /index.html {
+        add_header Cache-Control "no-cache";
+    }
+
+    location ~* ^/(app|bootstrap)\.js$|^/style\.css$ {
+        add_header Cache-Control "no-cache";
+    }
+
     location ~* \.wasm$ {
-        types {
-            application/wasm wasm;
-        }
+        default_type application/wasm;
+        expires 7d;
+        add_header Cache-Control "public, max-age=604800, immutable";
+    }
+
+    location ~* ^/public/vendor/.*\.(js|css)$ {
         expires 7d;
         add_header Cache-Control "public, max-age=604800, immutable";
     }
@@ -129,10 +151,21 @@ server {
         try_files $uri $uri/ /index.html;
     }
 
+    location = /index.html {
+        add_header Cache-Control "no-cache";
+    }
+
+    location ~* ^/(app|bootstrap)\.js$|^/style\.css$ {
+        add_header Cache-Control "no-cache";
+    }
+
     location ~* \.wasm$ {
-        types {
-            application/wasm wasm;
-        }
+        default_type application/wasm;
+        expires 7d;
+        add_header Cache-Control "public, max-age=604800, immutable";
+    }
+
+    location ~* ^/public/vendor/.*\.(js|css)$ {
         expires 7d;
         add_header Cache-Control "public, max-age=604800, immutable";
     }
@@ -160,6 +193,7 @@ sudo tail -f /var/log/nginx/error.log
 - If WebSocket fails, ensure `Upgrade` and `Connection` headers are set.
 - If upstream returns `502`, verify backend process state and `proxy_pass` target.
 - If Jsonnet runtime loading fails, verify that `.wasm` files are served with `application/wasm`.
+- Keep `index.html`, `app.js`, `bootstrap.js`, and `style.css` out of immutable caching unless you add content hashes to their filenames.
 
 ## 7. Recommended Production Hardening
 

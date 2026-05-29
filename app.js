@@ -4,8 +4,8 @@ const FORMAT_KEY = "jsonnet-review-format";
 const LAYOUT_MODE_KEY = "jsonnet-review-layout-mode";
 const SPLIT_RATIO_KEY = "jsonnet-review-split-ratio";
 const SPLIT_RATIO_MOBILE_KEY = "jsonnet-review-split-ratio-mobile";
-const JSONNET_WASM_EXEC_URLS = ["./public/vendor/jsonnet/wasm_exec.js", "https://jsonnet.org/js/wasm_exec.js"];
-const JSONNET_WASM_URLS = ["./public/vendor/jsonnet/libjsonnet.wasm", "https://jsonnet.org/js/libjsonnet.wasm"];
+const JSONNET_WASM_EXEC_URLS = ["https://jsonnet.org/js/wasm_exec.js", "./public/vendor/jsonnet/wasm_exec.js"];
+const JSONNET_WASM_URLS = ["https://jsonnet.org/js/libjsonnet.wasm", "./public/vendor/jsonnet/libjsonnet.wasm"];
 const JSONNET_RUNTIME_TIMEOUT_MS = 15000;
 
 const SAMPLE = `local app = 'jsonnet-review';
@@ -165,10 +165,21 @@ themeBtn.addEventListener("click", () => {
   applyTheme(nextTheme);
 });
 
-function setStatus(text, isError = false) {
+function setStatus(text, isError = false, type = getStatusType(text, isError)) {
   statusBadge.textContent = text;
   statusBadge.title = getStatusDescription(text, isError);
-  statusBadge.classList.toggle("is-error", isError);
+  statusBadge.classList.remove("is-error", "is-loading", "is-success", "is-warning");
+  if (type) {
+    statusBadge.classList.add(type);
+  }
+}
+
+function getStatusType(text, isError) {
+  if (isError) return "is-error";
+  if (text === "加载中" || text === "加载 WASM" || text === "渲染中") return "is-loading";
+  if (text === "完整加载" || text === "go-jsonnet WASM") return "is-success";
+  if (text === "有限预览" || text === "受限预览") return "is-warning";
+  return "";
 }
 
 function getStatusDescription(text, isError) {
@@ -178,9 +189,13 @@ function getStatusDescription(text, isError) {
 
   const descriptions = {
     初始化: "页面正在初始化 Jsonnet 预览环境。",
-    "加载 WASM": "正在加载本地 go-jsonnet WebAssembly 运行时；本地资源不可用时会尝试 jsonnet.org。",
+    加载中: "正在加载 go-jsonnet WebAssembly 运行时；第三方资源不可用时会尝试本地资源。",
+    "加载 WASM": "正在加载 go-jsonnet WebAssembly 运行时；第三方资源不可用时会尝试本地资源。",
     渲染中: "正在执行当前 Jsonnet 内容并生成预览结果。",
+    完整加载: "当前使用官方 go-jsonnet WebAssembly 运行时，支持单文件 Jsonnet 主体语法。",
     "go-jsonnet WASM": "当前使用官方 go-jsonnet WebAssembly 运行时，支持单文件 Jsonnet 主体语法。",
+    有限预览: "当前没有完整 Jsonnet 运行时，仅能进行有限语法预览。",
+    受限预览: "当前没有完整 Jsonnet 运行时，仅能进行有限语法预览。",
     空内容: "编辑区为空，暂无可预览内容。",
   };
 
