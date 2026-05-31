@@ -502,7 +502,6 @@ function initializeEditor(initialValue) {
   if (window.CodeMirror) {
     codeEditor = window.CodeMirror.fromTextArea(editor, {
       mode: "jsonnet",
-      lineNumbers: true,
       indentUnit: 2,
       tabSize: 2,
       matchBrackets: true,

@@ -308,16 +308,6 @@ body[data-theme="dark"] .status-badge.is-warning {
   min-height: 0;
 }
 
-#editorPanel .CodeMirror-gutters {
-  background: var(--editor-bg);
-  border-right: 1px solid var(--border);
-}
-
-#editorPanel .CodeMirror-linenumber,
-#editorPanel .CodeMirror-foldmarker {
-  color: var(--muted);
-}
-
 #editorPanel .CodeMirror-cursor {
   border-left-color: var(--editor-text);
 }
@@ -360,11 +350,6 @@ body[data-theme="dark"] .status-badge.is-warning {
 body[data-theme="dark"] #editorPanel .CodeMirror {
   color: var(--editor-text);
   background: var(--editor-bg);
-}
-
-body[data-theme="dark"] #editorPanel .CodeMirror-gutters {
-  background: var(--editor-bg);
-  border-right-color: #334155;
 }
 
 body[data-theme="dark"] #editorPanel .CodeMirror-selected {
