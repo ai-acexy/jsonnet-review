@@ -4,9 +4,9 @@ I created this minimal Jsonnet online preview project with a split editor / prev
 
 ## Environment Info
 
-- Authoring agent: Codex
-- Model used: GPT-5 (Codex coding agent runtime)
-- App runtime: Codex CLI
+- Authoring agent: DeepSeek
+- Model used: DeepSeek V4 Pro (Claude Code agent runtime)
+- App runtime: (Claude Code CLI
 
 ## Online
 
