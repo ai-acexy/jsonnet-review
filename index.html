@@ -24,6 +24,12 @@
         <p>Jsonnet 在线预览与格式转换</p>
       </div>
       <div class="actions">
+        <a class="main-site-link" href="https://www.acexy.cn/about" target="_blank" rel="noopener noreferrer" aria-label="主站（新标签页打开）">主站 <span aria-hidden="true">↗</span></a>
+        <div class="layout-modes" role="group" aria-label="视图模式">
+          <button type="button" data-layout-mode="editor" aria-pressed="false" aria-keyshortcuts="Alt+1">编辑</button>
+          <button type="button" data-layout-mode="split" aria-pressed="true" aria-keyshortcuts="Alt+2">分栏</button>
+          <button type="button" data-layout-mode="preview" aria-pressed="false" aria-keyshortcuts="Alt+3">预览</button>
+        </div>
         <select id="formatSelect" aria-label="输出格式">
           <option value="json">JSON</option>
           <option value="yaml">YAML</option>
@@ -45,9 +51,9 @@
         <textarea id="editor" spellcheck="false" aria-label="Jsonnet 输入"></textarea>
       </section>
 
-      <button class="splitter" id="splitterControls" type="button" aria-label="切换分栏模式" title="点击切换模式；拖拽可调整比例">
-        <span class="splitter-dot" aria-hidden="true"></span>
-      </button>
+      <div class="splitter" id="splitterControls" title="拖拽调整比例" aria-hidden="true">
+        <span class="splitter-dot"></span>
+      </div>
 
       <section class="panel" id="previewPanel">
         <div class="panel-title">
