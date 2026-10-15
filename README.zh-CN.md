@@ -4,9 +4,9 @@
 
 ## 环境信息
 
-- 创作代理：Codex
-- 使用模型：GPT-5（Codex coding agent runtime）
-- 运行环境：Codex CLI
+- 创作代理：DeepSeek
+- 使用模型：DeepSeek V4 Pro（Claude Code agent runtime）
+- 运行环境：Claude Code CLI
 
 ## 在线地址
 
