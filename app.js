@@ -148,17 +148,17 @@ function selectLayoutMode(mode) {
 }
 
 layoutModeButtons.forEach((button, index) => {
-  const key = index + 1;
+  const key = ["E", "H", "V"][index];
   button.removeAttribute("title");
-  button.dataset.shortcut = `${isMac ? "⌘" : "Alt"} + ${key}`;
-  button.setAttribute("aria-keyshortcuts", `${isMac ? "Meta" : "Alt"}+${key}`);
+  button.dataset.shortcut = `${isMac ? "⌘" : "Ctrl"} + ${key}`;
+  button.setAttribute("aria-keyshortcuts", `${isMac ? "Meta" : "Control"}+${key}`);
   button.addEventListener("click", () => selectLayoutMode(button.dataset.layoutMode));
 });
 
 document.addEventListener("keydown", (event) => {
-  const modifierPressed = isMac ? event.metaKey && !event.altKey : event.altKey && !event.metaKey;
-  if (!modifierPressed || event.ctrlKey || event.shiftKey || event.isComposing || event.repeat) return;
-  const mode = { Digit1: "editor", Digit2: "split", Digit3: "preview" }[event.code];
+  const modifierPressed = isMac ? event.metaKey && !event.ctrlKey : event.ctrlKey && !event.metaKey;
+  if (!modifierPressed || event.altKey || event.shiftKey || event.isComposing || event.repeat) return;
+  const mode = { KeyE: "editor", KeyH: "split", KeyV: "preview" }[event.code];
   if (!mode) return;
   event.preventDefault();
   selectLayoutMode(mode);
